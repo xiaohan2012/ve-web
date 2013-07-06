@@ -7,6 +7,10 @@
 
   <link href="assets/bootstrap/css/bootstrap.css" rel="stylesheet" media="screen">
   <link href="assets/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" media="screen">
+
+  <script src="assets/js/jquery-1.8.0.min.js"></script>
+  <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+  <script src="assets/js/index.js"></script>
 </head>
 <body>
   <div class="navbar">
@@ -26,56 +30,73 @@
     </div>
   </div>
   <div class="container">
-    <div id="pdb-selection" class="row step">
-      <h1>1st
-	<small>select your pdb structure</small>
-      </h1>
-      <div class="offset1" id="select-existing-pdb">
-        <h2>
-	  <small>1, Enter an existing PDB ID</small>
-	</h2>
-
-	<form class="well form-inline">
-	  <input type="text" class="input-xlarge" placeholder="PDB Id">
-	</form>
-      </div>
-      <div class="offset1" id="upload-local-pdb">
-        <h2><strong>Or</strong></h2>
-	<h2><small>Upload a local file in PDB format</small></h2>
-	<form class="well">
-	  <input class="input-file" type="file">
-	</form>
-      </div>
-      <div class="offset1" id="select-chains">
-        <h2>
-	  <small>2, Select the chain(s):</small>
-	</h2>
-	<form class="well">
-	  <div class="control-group">
-	    <select class="span1">
-              <option>B</option>
-              <option>C</option>
-              <option>D</option>
-	    </select>
-	  </div>
-	  <button type="submit" class="btn">Submit</button>
-	</form>
-      </div>
-      
-    </div>
-
-    <div id="epitope-selection" class="row step">
-      <h1>2nd
-	<small>Decide the epitope region</small>
-      </h1>
-      <ul class="nav nav-tabs">
+    <div id="left-tabs" class="span3">
+      <ul class="nav nav-tabs nav-stacked">
 	<li class="active">
-	  <a href="#">Manual Annotation </a>
+	  <a href="#pdb-selection">
+	    <span class="badge badge-warning">1</span>
+	    Pdb selection
+	  </a>
 	</li>
-	<li><a <a href="#">Using SEPPA</a></li>
-	<li><a href="#">Ignore it</a></li>
+	<li>
+	  <a href="#epitope-selection">
+	    <span class="badge">2</span>
+	    Epitope selection
+	  </a>
+	</li>
       </ul>
     </div>
+    <div class="tab-content span8 pull-right">
+      <div id="pdb-selection" class="tab-pane active">
+	<h2 class="text-info">
+	  Select your pdb structure</small>
+	</h2>
+	<div class="" id="select-existing-pdb">
+          <h3 class="">
+	    1, Enter an existing PDB ID
+	  </h3>
+	  
+	  <form class="well form-inline">
+	    <input type="text" class="input-xlarge" placeholder="PDB Id">
+	  </form>
+	</div>
+	<div class="" id="upload-local-pdb">
+          <h2><strong>Or</strong></h2>
+	  <h3 class="">Upload a local file in PDB format</h3>
+	  <form class="well">
+	    <input class="input-file" type="file">
+	  </form>
+	</div>
+	<div class="" id="select-chains">
+          <h3 class="">
+	    2, Select the chain(s)
+	  </h3>
+	  <form class="well">
+	    <div class="control-group">
+	      <select class="span1">
+		<option>B</option>
+		<option>C</option>
+		<option>D</option>
+	      </select>
+	    </div>
+	    <button type="submit" class="btn">Submit</button>
+	  </form>
+	</div>
+	
+      </div>
 
+      <div id="epitope-selection" class="tab-pane">
+	<h2>
+	  Decide the epitope region
+	</h2>
+	<ul class="nav nav-tabs">
+	  <li class="active">
+	    <a href="#">Manual Annotation </a>
+	  </li>
+	  <li><a <a href="#">Using SEPPA</a></li>
+		 <li><a href="#">Ignore it</a></li>
+	</ul>
+      </div>
+    </div>
   </div>
 </body>
