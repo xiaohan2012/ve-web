@@ -10,4 +10,11 @@ jQuery(function(){
 	var $prev = $(e.relatedTarget);
 	$prev.children(".badge").removeClass("badge-warning");
     });
+    
+    /*
+    $('#epitope-selection ul.nav').click(function (e) {
+	e.preventDefault();
+	$(this).tab('show');
+    });
+    */
 })
