@@ -1,0 +1,41 @@
+<!DOCTYPE HTML
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %} Virus Experiment Web App {% end %}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  {% block styles %}
+  <link href="{{ static_url("bootstrap/css/bootstrap.css") }}" rel="stylesheet" media="screen">
+  <link href="{{ static_url("bootstrap/css/bootstrap-responsive.css") }}" rel="stylesheet" media="screen">
+  {% end %}
+
+  {% block scripts %}
+  <script src="{{ static_url("js/jquery-1.8.0.min.js") }}"></script>
+  <script src="{{ static_url("bootstrap/js/bootstrap.min.js") }}"></script>
+  <script src="{{ static_url("js/index.js") }}"></script>
+  {% end %}
+
+</head>
+<body>
+  <div class="navbar">
+    <div class="navbar-inner">
+      <div class="container">
+	<a class="brand">Virus Experiment</a>
+	<ul class="nav pull-right">
+	  <li class="active">
+	    <a href="#">Server</a>
+	  </li>
+	  <li><a href="#">Batch Query</a></li>
+	  <li><a href="#">Example</a></li>
+	  <li><a href="#">Help</a></li>
+	  <li><a href="#">Contact</a></li>
+	</ul>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    {% block content %}
+    {% end %}
+  </div>
+</body>
