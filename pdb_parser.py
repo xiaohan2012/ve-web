@@ -74,7 +74,7 @@ def group_by(lst, key = lambda v:v, val_mapping = lambda v:v ):
     return dict([(v, [val_mapping(l)
                       for l in lst if key(l) == v])
                  for v in vals])
-    
+
 def parse(structure_id, string):
     lines = string.split("\n")
     atom_lines = [l for l in lines if l[:4] == "ATOM"]
