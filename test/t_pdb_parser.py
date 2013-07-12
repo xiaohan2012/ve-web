@@ -30,8 +30,29 @@ class PdbParserTest(unittest.TestCase):
         self.assertEqual(len(self.a), 1110)
         
     def test_residue_count(self):
+        """if total residue count is correct"""
         self.assertEqual(len(self.r), 144)
 
+    def test_residue_atom_count(self):
+        """by sampling the 51th residue if residue's atom count is correct"""
+        self.assertEqual(len(self.r[50]), 6)
+        
+    def test_atom_residue(self):
+        """if atom's residue is paired correctly"""
+        self.assertEqual(self.a[0].residue.id, 1)
+        self.assertEqual(self.a[45].residue.id, 6)
+
+    def test_atom_chain(self):
+        """if atom's chain is paired correctly"""
+        self.assertEqual(self.a[11].chain.id, "A")
+        self.assertEqual(self.a[1100].chain.id, "A")
+
+    def test_residue_chain(self):
+        """if residue's chain is paired correctly"""
+        self.assertEqual(self.r[11].chain.id, "A")
+        self.assertEqual(self.r[100].chain.id, "A")
+        
+        
 class GroupByTest(unittest.TestCase):
     """test for the group by function"""
     

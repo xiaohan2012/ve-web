@@ -1,4 +1,5 @@
 from UserList import UserList
+from simplejson import dumps
 
 class Structure(object):
     def __init__(self, structure_id, chains = [], residues = [], atoms = []):
@@ -7,46 +8,52 @@ class Structure(object):
         self.residues = residues
         self.chains = chains
         self.atoms = atoms
-
-    def get_chains(self):
-        return self.chains
-        
-    def get_atoms(self):
-        self.atoms = (a for res in self.residues for a in res.atoms)
                 
-    def add_res(self, res):
-        self.residues.append(res)
-
-    def add_chain(self, chain):
-        self.chains.append(chain)
-
+    def to_json(self):
+        pass
+        
 class Chain(UserList):
     def __init__(self, chain_id, residues):
         self.residues = residues
-        self.chain_id = chain_id
+        self.id = chain_id
         super(Chain,self).__init__(residues)
+
+    def prepare_json(self):
+        return [a.prepare_json() for a in self.atoms]
         
-    def add_res(self, res):
-        self.append(res)
         
 class Residue(UserList):
     def __init__(self, residue_id,  chain_id, atoms = []):
-        self.residue_id = residue_id
-        self.chain = chain_id
+        self.id = residue_id
+        
+        self.chain = None
+        self.chain_id = chain_id
         self.atoms = atoms
-        super(Residue,self).__init__(atoms)
 
+        super(Residue,self).__init__(atoms)
+        
+    def prepare_json(self):
+        return [a.prepare_json() for a in self.atoms]
+        
 class Atom(object):
     def __init__(self, id,  element, xyz, residue_name, residue_id, chain_id, ins_res, ail):
         self.id = id
         self.element = element
         self.xyz = xyz
         self.x, self.y, self.z = self.xyz
+        
+        self.residue = None
         self.residue_id = residue_id
         self.residue_name = residue_name
+        
+        self.chain = None
         self.chain_id = chain_id
+        
         self.ins_res = ins_res
         self.ail = ail
+
+    def prepare_json(self):
+        return {element: self.element, self.position: self.xyz}
         
     def __str__(self):
         return "%s at %f %f %f of residue %d(%s) of chain %s" %(self.element, self.x, self.y, self.z,
@@ -85,5 +92,16 @@ def parse(structure_id, string):
     chains = [Chain(chain_id, ats) for chain_id, ats in atoms_by_chain.items()]
 
     residues = [Residue(res_id, ats[0].chain_id, ats) for res_id, ats in atoms_by_residue.items()]
-    
+
+    #rebind phase, chicken-egg problem
+    resid_to_res = dict([(res.id, res) for res in residues])
+    chainid_to_chain = dict([(chain.id, chain) for chain in chains])
+
+    for atom in atoms:
+        atom.residue = resid_to_res[atom.residue_id]
+        atom.chain = chainid_to_chain[atom.chain_id]
+        
+    for res in residues:
+        res.chain = chainid_to_chain[res.chain_id]
+        
     return Structure(structure_id, chains, residues, atoms)
