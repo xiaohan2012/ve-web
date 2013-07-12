@@ -10,6 +10,8 @@ class PdbParserTest(unittest.TestCase):
               open(self.pdb_path).read())
         self.a,self.r,self.c = st.atoms, st.residues, st.chains
 
+        self.st = st
+        
     def test_atom_content(self):
         a = self.a[0]
         
@@ -51,8 +53,26 @@ class PdbParserTest(unittest.TestCase):
         """if residue's chain is paired correctly"""
         self.assertEqual(self.r[11].chain.id, "A")
         self.assertEqual(self.r[100].chain.id, "A")
+
+    def test_json_atom_content(self):
+        """test atom json content"""
+        actual = self.a[0].prepare_json()
+        expected = {'position': (18.165, 12.653, 2.904), 'id': 1, 'element': 'N'}
+        self.assertEqual(actual, expected)
         
-        
+    def test_json_residue_content(self):
+        """after to json, check the first residue's content"""
+        actual = self.r[0].prepare_json()
+        expected = {'id': 1, 'atoms': [1, 2, 3, 4, 5, 6, 7, 8]} 
+        self.assertEqual(actual, expected)
+
+    def test_json_chain_content(self):
+        """chain json content"""
+        actual = len(self.c[0].prepare_json()["residues"])
+        expected = 1110
+        self.assertEqual(actual, expected)
+
+            
 class GroupByTest(unittest.TestCase):
     """test for the group by function"""
     

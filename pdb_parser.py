@@ -9,8 +9,12 @@ class Structure(object):
         self.chains = chains
         self.atoms = atoms
                 
-    def to_json(self):
-        pass
+    def prepare_json(self):
+        return {
+            "atoms": [a.prepare_json() for a in self.atoms],
+            "residues":[r.prepare_json() for r in self.residues],
+            "chains": [c.prepare_json() for c in self.chains],
+        }
         
 class Chain(UserList):
     def __init__(self, chain_id, residues):
@@ -19,7 +23,10 @@ class Chain(UserList):
         super(Chain,self).__init__(residues)
 
     def prepare_json(self):
-        return [a.prepare_json() for a in self.atoms]
+        return {
+            "id": self.id,
+            "residues": [r.id for r in self.residues]
+        }
         
         
 class Residue(UserList):
@@ -33,7 +40,7 @@ class Residue(UserList):
         super(Residue,self).__init__(atoms)
         
     def prepare_json(self):
-        return [a.prepare_json() for a in self.atoms]
+        return {"id": self.id, "atoms": [a.id for a in self.atoms]}
         
 class Atom(object):
     def __init__(self, id,  element, xyz, residue_name, residue_id, chain_id, ins_res, ail):
@@ -53,7 +60,7 @@ class Atom(object):
         self.ail = ail
 
     def prepare_json(self):
-        return {element: self.element, self.position: self.xyz}
+        return {"id": self.id, "element": self.element, "position": self.xyz}
         
     def __str__(self):
         return "%s at %f %f %f of residue %d(%s) of chain %s" %(self.element, self.x, self.y, self.z,
