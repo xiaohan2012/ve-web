@@ -12,5 +12,3 @@ def download_pdb_file(structure_id):
         return None
 
 
-if __name__ == '__main__':
-    download_pdb_file("2")

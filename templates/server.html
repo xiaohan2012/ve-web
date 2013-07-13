@@ -26,19 +26,29 @@
 <div class="tab-content span8 pull-right">
   <div id="pdb-selection" class="tab-pane active">
     <h2 class="text-info">
-      Select your pdb structure</small>
-</h2>
+      <small>
+	Select your pdb structure
+      </small>
+    </h2>
 <div id="select-existing-pdb">
-  <h3>
-    1, Enter an existing PDB ID
-  </h3>
-  <form class="well form-inline">
-    <input type="text" class="input-xlarge" placeholder="PDB Id">
+  <h1>
+    <small>Enter an existing PDB ID</small>
+  </h1>
+  <form class="well form-inline select-pdb">
+    <div class="control-group">
+      <div class="controls">
+	<input type="text" class="input-xlarge" placeholder="PDB Id">
+	<span class="help-inline hidden"></span>
+      </div>
+    </div>
+    
   </form>
 </div>
 <div class="" id="upload-local-pdb">
   <h2><strong>Or</strong></h2>
-  <h3 class="">Upload a local file in PDB format</h3>
+  <h1>
+    <small>Upload a local file in PDB format</small>
+  </h1>
   <form class="well">
     <input class="input-file" type="file">
   </form>
@@ -147,4 +157,9 @@
   <button class="btn btn-primary">Submit</button>
   <button class="btn">Cancel</button>
 </div>
+
+<script src="{{ static_url("js/util.js") }}"></script>
+<script src="{{ static_url("js/selectpdb.js") }}"></script>
 {% end %}
+
+

@@ -34,5 +34,5 @@ class SelectPDBHandler(tornado.web.RequestHandler):
             #it just exists in our db
             self.write(json_encode({
                 "pdb_id": structure_id,
-                "status":"inserted"
+                "status":"exist"
             }))
