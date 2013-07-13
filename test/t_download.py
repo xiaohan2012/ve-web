@@ -1,3 +1,5 @@
+import urllib2
+
 from common import *
 
 from crawler import download_pdb_file
@@ -9,6 +11,10 @@ class PdbFileDownloaderTest(unittest.TestCase):
         expected = 122472
         self.assertEqual(actual, expected)
 
-
+    def test_not_downloadable_exception(self):
+        actual = download_pdb_file("~~")
+        expected = None
+        self.assertEqual(actual, expected)
+        
 if __name__ == '__main__':
     unittest.main()
