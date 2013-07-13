@@ -13,11 +13,13 @@ class IndexHandler(tornado.web.RequestHandler):
         self.render("server.html")
         
 if __name__ == '__main__':
+    from select_pdb import SelectPDBHandler
+    
     tornado.options.parse_command_line()
     app = tornado.web.Application(
         handlers = [
             (r"/", IndexHandler),
-            (r"/select-pdb/\w+"),
+            (r"/select-pdb/(\w+)", SelectPDBHandler),
         ],
         template_path=os.path.join(os.path.dirname(__file__), "templates"),
         static_path=os.path.join(os.path.dirname(__file__), "assets"),
