@@ -30,16 +30,23 @@
   <div class="tab-content">
     <div class="tab-pane active" id="pdbchain-selection">
       <ul class="nav nav-tabs">
-	<li class="active"><a href="#pdb1" data-toggle="tab">PDB 1</a></li>
-	<li><a href="#pdb2" data-toggle="tab">PDB 2</a></li>
+	{% for i in range(1,3)%}
+	<li class={% if i == 1%}"active" {% end %}>
+	  <a href="#pdb{{i}}" data-toggle="tab">
+	    {[{ pdb{{i}}_name }]}
+	    <i class="icon icon-ok hidden"></i>
+	  </a>
+	</li>
+	{% end %}
       </ul>
       <div class="tab-content">
-	<div class="tab-pane active" id="pdb1">
-	  {% include "pdbchain-selection.html" %}
-	</div>
-	<div class="tab-pane" id="pdb2">
-	  {% include "pdbchain-selection.html" %}
-	</div>
+
+	{% for i in range(1,3)%}
+	  <div class="tab-pane {% if i == 1 %} active {%end%}" id="pdb{{i}}">
+	  {% module Template("pdbchain-selection.html", tab_id=i) %}
+	  </div>
+	{% end %}
+
       </div>
     </div>
     <div class="tab-pane" id="epitope-selection">

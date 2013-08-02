@@ -10,7 +10,7 @@ define("port", default=8000, help="port number", type=int)
 
 class IndexHandler(tornado.web.RequestHandler):
     def get(self):
-        self.render("server.html")
+        self.render("pairwise-comparison.html")
         
 if __name__ == '__main__':
     from select_pdb import SelectPDBHandler
