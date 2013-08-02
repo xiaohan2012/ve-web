@@ -1,0 +1,159 @@
+<div id="left-tabs" class="span3">
+  <ul class="nav nav-tabs nav-stacked">
+    <li class="active">
+      <a href="#pdb-selection">
+	<span class="badge badge-warning">1</span>
+	Pdb selection
+      </a>
+    </li>
+    <li>
+      <a href="#chain-selection">
+	<span class="badge">2</span>
+	Chain selection
+      </a>
+    </li>
+    <li>
+      <a href="#epitope-selection">
+	<span class="badge">3</span>
+	Epitope selection
+      </a>
+    </li>
+  </ul>
+</div>
+<div class="tab-content span8 pull-right">
+  <div id="pdb-selection" class="tab-pane active">
+    <h2 class="text-info">
+      <small>
+	Select your pdb structure
+      </small>
+    </h2>
+    <div id="select-existing-pdb">
+      <h1>
+	<small>Enter an existing PDB ID</small>
+      </h1>
+      <form class="well form-inline select-pdb">
+	<div class="control-group">
+	  <div class="controls">
+	    <input type="text" class="input-xlarge" placeholder="PDB Id">
+	    <span class="help-inline hidden"></span>
+	  </div>
+	</div>
+	
+      </form>
+    </div>
+    <div class="" id="upload-local-pdb">
+      <h2><strong>Or</strong></h2>
+      <h1>
+	<small>Upload a local file in PDB format</small>
+      </h1>
+      <form class="well">
+	<input class="input-file" type="file">
+      </form>
+    </div>
+    <button class="btn btn-primary">Next</button>
+    <button class="btn">Cancel</button>
+  </div>
+<div id="chain-selection" class="tab-pane">
+  <div class="">
+    <h2 class="text-info">
+      Select the chain(s)
+    </h2>
+    <form class="well">
+      <div class="control-group">
+	<select class="span1">
+	  <option>B</option>
+	  <option>C</option>
+	  <option>D</option>
+	</select>
+      </div>
+      <button class="btn btn-primary">Next</button>
+      <button class="btn">Cancel</button>
+    </form>
+  </div>
+
+</div>
+<div id="epitope-selection" class="tab-pane">
+  <h2 class="text-info">
+    Decide epitope region
+  </h2>
+  <ul class="nav nav-tabs">
+    <li class="active">
+      <a href="#manual-annotation" data-toggle="tab">Manual Annotation </a>
+    </li>
+    <li><a href="#use-seppa" data-toggle="tab">Use SEPPA</a></li>
+    <li><a href="#ignore-it" data-toggle="tab">Ignore it</a></li>
+  </ul>
+  <div class="tab-content">
+    <div class="tab-pane" id="manual-annotation"> 
+      <h2>
+        <small>
+	  Use your mouse to select the epitope region
+        </small>
+      </h2>
+      <div>
+	<img src="{{ static_url("img/molecule-example.png") }}"/>
+      </div>
+    </div>
+    <div id="use-seppa" class="tab-pane">
+      <div id="seppa-input">
+	<h2>
+          <small>
+	    Input:
+	  </small>
+	</h2>
+	<form class="well form-horizontal">
+	  <div class="control-group">
+	    <label class="control-label" for="seppa-threshold">Threshold</label>
+	    <div class="controls">
+	      <input type="text" id="seppa-threshold" placeholder="4.0">
+	    </div>
+	  </div>
+	  
+	</form>
+      </div>
+      <div id="seppa-result">
+	<h2>Result:</h2>
+        <table class="table table-striped">
+	  <tr>
+	    <th>
+	      Index range
+	    </th>
+	    <th>
+	      Residues
+	    </th>
+	  </tr>
+          <tr>
+            <td>
+	      1-50
+            </td>
+            <td>
+	      RDFNNLTKG
+	      <span class="label label-warning">LCTI</span>
+	      NSWHIYGKD
+	      <span class="label label-warning">NAvRIg</span>
+	      EDSDvLvTREpyvSCDPDECRf
+            </td>
+          </tr>
+          <tr>
+            <td>
+	      51-100
+            </td>
+            <td>
+	      RDFNNLTKGLCT
+	      <span class="label label-warning">INSWHI</span>
+	      YGKDNAvRIgEDSDvLvTREpyvSCDPDECRf
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div id="ignore-it" class="tab-pane">
+      Ignore it
+    </div>
+  </div>
+  <button class="btn btn-primary">Submit</button>
+  <button class="btn">Cancel</button>
+</div>
+
+<script src="{{ static_url("js/util.js") }}"></script>
+<script src="{{ static_url("js/selectpdb.js") }}"></script>
